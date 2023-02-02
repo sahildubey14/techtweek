@@ -3,9 +3,9 @@ pipeline {
      stages {
          stage('Build') {
              steps {
-                withCredentials([file(credentialsId: 'PRIVATE_KEY', keyFileVariable: 'keyFile', variable: 'APP_URL')]) {
+                withCredentials([file(credentialsId: '${deploy_to}', keyFileVariable: 'keyFile', variable: 'APP_ENV')]) {
                     sh "rm -rf /var/lib/jenkins/workspace/sds/.env"
-                     sh "cp -r \$APP_URL /var/lib/jenkins/workspace/sds/.env"
+                     sh "cp -r \$APP_ENV /var/lib/jenkins/workspace/sds/.env"
                 }
 
              }
