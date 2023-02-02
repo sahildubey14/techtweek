@@ -4,7 +4,7 @@ pipeline {
          stage('Build') {
              steps {
                 withCredentials([file(credentialsId: 'PRIVATE_KEY', keyFileVariable: 'keyFile', variable: 'APP_URL')]) {
-                   sh "cp \$APP_URL /.env"
+                   sh "cp \$APP_URL /var/lib/jenkins/workspace/sds/.env"
                 }
 
              }
