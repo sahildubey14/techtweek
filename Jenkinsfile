@@ -4,7 +4,7 @@ pipeline {
          stage('Build') {
              steps {
                 withCredentials([file(credentialsId: 'PRIVATE_KEY', variable: 'my-public-key')]) {
-                   sh "cp \$my-public-key /"
+                   sh 'use $my-public-key'
                 }
 
              }
