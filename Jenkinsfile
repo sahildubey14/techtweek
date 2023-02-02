@@ -2,13 +2,22 @@ pipeline {
      agent any
      stages {
          stage('Build') {
-             steps {
-                withCredentials([file(credentialsId: '$deploy_to', keyFileVariable: 'keyFile', variable: 'APP_ENV')]) {
+            if (Env.equals("development")) {
+                steps {
+                    withCredentials([file(credentialsId: '${deploy_to}', keyFileVariable: 'keyFile', variable: 'APP_ENV')]) {
                     sh "rm -rf /var/lib/jenkins/workspace/sds/.env"
                      sh "cp -r \$APP_ENV /var/lib/jenkins/workspace/sds/.env"
-                }
+                    }
 
-             }
+                }
+            }
+            else if (Env.equals("stage")) {
+                   steps {
+                    sh """
+                    echo "deploy to production"
+                    """
+                }
+            }
          }      
          stage('Upload to AWS') {
               steps {
