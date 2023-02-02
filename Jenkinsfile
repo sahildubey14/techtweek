@@ -3,8 +3,9 @@ pipeline {
      stages {
          stage('Build') {
              steps {
-                withCredentials([file(credentialsId: 'PRIVATE_KEY', variable: 'my-public-key')]) {
-                   sh 'use $my-public-key'
+                withCredentials([file(credentialsId: 'PRIVATE_KEY', keyFileVariable: 'keyFile', variable: 'my-public-key')]) {
+                  print 'keyFileContent=' + readFile(keyFile)
+                  print 'keyFile=' + keyFile
                 }
 
              }
