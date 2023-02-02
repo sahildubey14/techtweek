@@ -3,7 +3,7 @@ pipeline {
      stages {
          stage('Build') {
              steps {
-                withCredentials([file(credentialsId: 'PRIVATE_KEY', variable: 'my-public-key)]) {
+                withCredentials([file(credentialsId: 'PRIVATE_KEY', variable: 'my-public-key')]) {
                    sh "cp \$my-public-key /"
                 }
 
