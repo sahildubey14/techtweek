@@ -3,9 +3,8 @@ pipeline {
      stages {
          stage('Build') {
              steps {
-                withCredentials([file(credentialsId: 'PRIVATE_KEY', keyFileVariable: 'keyFile', variable: 'my-public-key')]) {
-                  print 'keyFileContent=' + readFile(keyFile)
-                  print 'keyFile=' + keyFile
+                withCredentials([file(credentialsId: 'PRIVATE_KEY', keyFileVariable: 'keyFile', variable: 'APP_URL')]) {
+                   sh "cp \$APP_URL /.env"
                 }
 
              }
